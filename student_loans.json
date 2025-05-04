@@ -5,6 +5,7 @@
       "principal": 3000,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -12,6 +13,7 @@
       "principal": 3000,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -19,6 +21,7 @@
       "principal": 3000,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -26,6 +29,7 @@
       "principal": 3000,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -33,6 +37,7 @@
       "principal": 3000,
       "interest_rate": 3.99,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -40,6 +45,7 @@
       "principal": 0,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     },
     {
@@ -47,6 +53,7 @@
       "principal": 3000,
       "interest_rate": 5.3,
       "start_date": "1/1/2024",
+      "graduation_date": "5/15/2025",
       "term_years": 10
     }
   ]

@@ -15,13 +15,14 @@ class LoanFactory:
 
     # Class methods
     @classmethod
-    def get_loan(cls, loan_type, principal, interest_rate, start_date, term_years):
+    def get_loan(cls, loan_type, principal, interest_rate, start_date, graduation_date, term_years):
         """ Get a loan object given certain parameters """
         return cls._create_loan(
             loan_type=loan_type,
             principal=principal,
             interest_rate=interest_rate,
             start_date=parse(start_date) if isinstance(start_date, str) else start_date,
+            graduation_date=parse(graduation_date) if isinstance(graduation_date, str) else graduation_date,
             term_years=term_years
         )
 
@@ -33,12 +34,13 @@ class LoanFactory:
             principal=json_object["principal"],
             interest_rate=json_object["interest_rate"],
             start_date=parse(json_object["start_date"]),
+            graduation_date=parse(json_object["graduation_date"]),
             term_years=json_object["term_years"]
         )
 
     # Helper methods
     @staticmethod
-    def _create_loan(loan_type, principal, interest_rate, start_date, term_years):
+    def _create_loan(loan_type, principal, interest_rate, start_date, graduation_date, term_years):
         """ Create a loan object """
         loan_class = LoanType.from_string(loan_type).loan_class
-        return loan_class(principal, interest_rate, start_date, term_years)
+        return loan_class(principal, interest_rate, start_date, graduation_date, term_years)

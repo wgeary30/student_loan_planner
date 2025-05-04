@@ -8,14 +8,17 @@ loan
 
 # Import modules
 from abc import ABC, abstractmethod
+from datetime import datetime
+
 
 # Loan class
 class Loan(ABC):
 
-    def __init__(self, principal, interest_rate, start_date, term_years):
+    def __init__(self, principal, interest_rate, start_date, graduation_date, term_years):
         self.principal = principal
         self.interest_rate = interest_rate / 100
         self.start_date = start_date
+        self.graduation_date = graduation_date
         self.term_years = term_years
 
     def __str__(self):
@@ -28,6 +31,22 @@ class Loan(ABC):
             return (f"{self.__class__.__name__} - ${self.principal:,.2f} "
                     f"({self.interest_rate * 100:.2f}% for {self.term_years} years, "
                     f"currently: ${current_total:,.2f})")
+
+    def is_in_grace_period(self, current_date):
+        """ Check if the loan is in the grace period """
+        grace_start, grace_end = self.grace_period_range()
+        return grace_start <= current_date <= grace_end
+
+    def grace_period_remaining(self, current_date=datetime.now()):
+        """ Determine the number of days remaining in the grace period """
+        _, grace_end = self.grace_period_range()
+        grace_days = (grace_end - current_date).days
+        return max(grace_days, 0)
+
+    @abstractmethod
+    def grace_period_range(self):
+        # Loan-specific grace period logic
+        pass
 
     @abstractmethod
     def monthly_payment(self):

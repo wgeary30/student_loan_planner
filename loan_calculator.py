@@ -8,6 +8,7 @@ loan_calculator
 
 # Import modules
 import json
+from datetime import datetime
 
 from loans.loan_factory import LoanFactory
 
@@ -35,9 +36,8 @@ def main():
 
     # Initialize student loans
     loans = parse_loans(LOAN_FILE)
-    for loan in loans:
-        print(loan)
-
+    print(loans[0].grace_period_range())
+    print(loans[0].grace_period_remaining(datetime(2024, 7, 1)))
 
 if __name__ == "__main__":
     main()

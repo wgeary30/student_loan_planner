@@ -7,10 +7,19 @@ direct_plus_loan
 """
 
 # Import modules
+from dateutil.relativedelta import relativedelta
 from loans.loan import Loan
 
 # DirectSubsidizedLoan class
 class DirectPlusLoan(Loan):
+
+    GRACE_PERIOD_MONTHS = 6
+
+    def grace_period_range(self):
+        """ Determine the start and end date of the grace period """
+        grace_start = self.start_date
+        grace_end = self.start_date + relativedelta(months=self.GRACE_PERIOD_MONTHS)
+        return grace_start, grace_end
 
     def monthly_payment(self):
         pass
