@@ -1,0 +1,11 @@
+# Ignore user loans file
+student_loans.json
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore PyCharm project files
+.idea/
+
+# Ignore Python bytecode files
+__pycache__/
