@@ -3,16 +3,17 @@ William Geary
 Student Loan Planner
 2 May 2025
 --------------------------------------------------------------------------------
-direct_unsubsidized_loan
+direct_plus_loan
 """
 
 # Import modules
 from dateutil.relativedelta import relativedelta
 from loans.loan import Loan
 
-# DirectUnsubsidizedLoan class
-class DirectUnsubsidizedLoan(Loan):
+# DirectSubsidizedLoan class
+class DirectPlusLoan(Loan):
 
+    # Constants
     GRACE_PERIOD_MONTHS = 6
 
     def grace_period_range(self):
@@ -21,10 +22,13 @@ class DirectUnsubsidizedLoan(Loan):
         grace_end = self.start_date + relativedelta(months=self.GRACE_PERIOD_MONTHS)
         return grace_start, grace_end
 
-    def monthly_payment(self):
+    def expected_monthly_payment(self):
         pass
 
-    def current_total(self):
+    def actual_monthly_payment(self):
+        pass
+
+    def remaining_balance(self):
         return self.principal  # TODO: Correct logic, only here for loan __str__ method
 
     def total_paid(self):

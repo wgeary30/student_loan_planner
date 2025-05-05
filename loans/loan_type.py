@@ -8,9 +8,9 @@ loan_type
 
 # Import modules
 from enum import Enum
-from loans.direct_plus_loan import DirectPlusLoan
-from loans.direct_subsidized_loan import DirectSubsidizedLoan
-from loans.direct_unsubsidized_loan import DirectUnsubsidizedLoan
+from loans.types.direct_plus_loan import DirectPlusLoan
+from loans.types.direct_subsidized_loan import DirectSubsidizedLoan
+from loans.types.direct_unsubsidized_loan import DirectUnsubsidizedLoan
 
 # LoanType class
 class LoanType(Enum):

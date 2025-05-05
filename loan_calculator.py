@@ -36,8 +36,10 @@ def main():
 
     # Initialize student loans
     loans = parse_loans(LOAN_FILE)
-    print(loans[0].grace_period_range())
+    print(loans[0].expected_monthly_payment())
     print(loans[0].grace_period_remaining(datetime(2024, 7, 1)))
+    # TODO: DETERMINE STRUCTURE OF PAYMENTS (OBJECTS?)
+    # TODO: Fix PaymentFactory after determining base Payment class parameters
 
 if __name__ == "__main__":
     main()
