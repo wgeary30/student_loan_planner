@@ -8,7 +8,7 @@ payment_factory
 
 # Import modules
 from dateutil.parser import parse
-from payments.payment_type import PaymentType
+from payments.types.payment_type import PaymentType
 
 # PaymentFactory class
 class PaymentFactory:

@@ -40,6 +40,7 @@ def main():
     print(loans[0].grace_period_remaining(datetime(2024, 7, 1)))
     # TODO: DETERMINE STRUCTURE OF PAYMENTS (OBJECTS?)
     # TODO: Fix PaymentFactory after determining base Payment class parameters
+    # TODO: TYPEHINTING FOR DATES, USE DATES RATHER THAN DATETIMES
 
 if __name__ == "__main__":
     main()

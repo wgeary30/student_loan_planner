@@ -8,14 +8,18 @@ payment_type
 
 # Import modules
 from enum import Enum
-from payments.types.standard_payment import StandardPayment
+from payments.types.rehabilitation_payment import RehabilitationPayment
+from payments.types.scheduled_payment import ScheduledPayment
 from payments.types.extra_payment import ExtraPayment
+from payments.types.settlement_payment import SettlementPayment
 
 # PaymentType class
 class PaymentType(Enum):
 
-    STANDARD = ("Standard", StandardPayment)
+    SCHEDULED = ("Scheduled", ScheduledPayment)
     EXTRA = ("Extra", ExtraPayment)
+    SETTLEMENT = ("Settlement", SettlementPayment)
+    REHABILITATION = ("Rehabilitation", RehabilitationPayment)
 
     # Properties
     @property

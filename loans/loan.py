@@ -7,32 +7,64 @@ loan
 """
 
 # Import modules
+import math
+
 from abc import ABC, abstractmethod
 from datetime import datetime
+
+from events.types.payment_event import PaymentEvent
+from loans.state import LoanState, LoanConfig
+from payments.payment import Payment
+from payments.payment_factory import PaymentFactory
 
 # Loan class
 class Loan(ABC):
 
-    def __init__(self, principal, interest_rate, start_date, graduation_date, term_years):
-        self.principal = principal
-        self.interest_rate = interest_rate / 100
-        self.start_date = start_date
-        self.graduation_date = graduation_date
-        self.term_years = term_years
-        self.payments = []
+    def __init__(self, config: LoanConfig, state: LoanState=None):
+        self.loan_config = config
+        self.loan_state = state if state else LoanState(
+            current_date=datetime.now().date(),
+            principal_balance=self.loan_config.original_principal
+        )
 
     def __str__(self):
         remaining_balance = self.remaining_balance()
 
         if remaining_balance == 0:
             return (f"{self.__class__.__name__} - Paid Off "
-                    f"(${self.principal:,.2f} originally, {self.interest_rate * 100:.2f}% for {self.term_years} years)")
+                    f"(${self.principal:,.2f} originally, {self.interest_rate * 100:.2f}% for "
+                    f"{math.ceil(self.term_months / 12)} years)")
         else:
             return (f"{self.__class__.__name__} - ${self.principal:,.2f} "
-                    f"({self.interest_rate * 100:.2f}% for {self.term_years} years, "
+                    f"({self.interest_rate * 100:.2f}% for {math.ceil(self.term_months / 12)} years, "
                     f"currently: ${remaining_balance:,.2f})")
 
-    # Inherited methods
+    # Properties
+    @property
+    def principal(self):
+        return self.loan_state.principal_balance
+
+    @property
+    def interest_rate(self):
+        return self.loan_config.interest_rate
+
+    @property
+    def term_months(self):
+        return self.loan_config.term_months
+
+    @property
+    def disbursement_date(self):
+        return self.loan_config.disbursement_date
+
+    @property
+    def graduation_date(self):
+        return self.loan_config.graduation_date
+
+    @property
+    def loan_history(self):
+        return self.loan_state.loan_history
+
+    # Inherited public methods
     def is_in_grace_period(self, current_date):
         """ Check if the loan is in the grace period """
         grace_start, grace_end = self.grace_period_range()
@@ -46,9 +78,18 @@ class Loan(ABC):
 
     def make_payment(self, amount, date=datetime.now().date(), payment_type="standard_payment"):
         """ Add a user payment to payments """
-        # TODO: Use the PaymentFactory
-        payment = Payment(amount, date)
+        payment = PaymentFactory.get_payment(payment_type, amount, date)
+        self.apply_payment(payment)
+
+    def apply_payment(self, payment: Payment):
+        """ Apply a payment to the loan """
+        # TODO: Apply the payment to the loan, editing interest, principal etc.
         self.payments.append(payment)
+
+    def total_paid(self, date=None):
+        """ Return the total amount paid by a certain date """
+        date = date if date else datetime.now().date()
+        return self._paid_as_of(date)
 
     # Abstract methods
     @abstractmethod
@@ -62,7 +103,7 @@ class Loan(ABC):
         pass
 
     @abstractmethod
-    def actual_monthly_payment(self):
+    def current_monthly_payment(self):
         # Loan-specific actual monthly payment logic
         pass
 
@@ -72,17 +113,19 @@ class Loan(ABC):
         pass
 
     @abstractmethod
-    def total_paid(self):
-        # Loan-specific total paid logic
-        pass
-
-    @abstractmethod
     def apply_relief(self, relief_policy):
         # Loan-specific relief logic
         pass
 
-    # Helper methods
-    def _paid_as_of(self, date=datetime.now().date()):
-        # TODO: DETERMINE STRUCTURE OF PAYMENTS WHEN APPENDED, WHAT INFORMATION DO I NEED?
-        """ Determine the total amount paid at a current date """
-        return sum([a for d, a in self.payments if d <= date])
+    # Inherited helper methods
+    def _paid_as_of(self, date=None):
+        """ Determine the total amount paid by a current date """
+        date = date if date else datetime.now().date()
+        return sum([event.amount_paid for event in self.loan_history if isinstance(event, PaymentEvent) and
+                    event.timestamp.date() <= date])
+
+    def _add_to_history(self):
+        """ Add an event to the loan history """
+        # TODO: Determine how to add to loan history
+        self.loan_history.append()
+        pass
