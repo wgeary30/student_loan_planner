@@ -11,6 +11,7 @@ import json
 from datetime import datetime
 
 from loans.loan_factory import LoanFactory
+from payments.types.scheduled_payment import ScheduledPayment
 
 # Initialize constants
 LOAN_FILE = "student_loans.json"
@@ -38,6 +39,8 @@ def main():
     loans = parse_loans(LOAN_FILE)
     print(loans[0].expected_monthly_payment())
     print(loans[0].grace_period_remaining(datetime(2024, 7, 1)))
+    payment = ScheduledPayment(amount_paid=120.0, timestamp=datetime.now())
+    loans[0].apply_payment(payment)
     # TODO: DETERMINE STRUCTURE OF PAYMENTS (OBJECTS?)
     # TODO: Fix PaymentFactory after determining base Payment class parameters
     # TODO: TYPEHINTING FOR DATES, USE DATES RATHER THAN DATETIMES

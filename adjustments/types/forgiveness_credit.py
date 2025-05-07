@@ -11,5 +11,5 @@ from payments.payment import Payment
 
 # ForgivenessCredit class
 class ForgivenessCredit(Payment):
-
+    # TODO: Should this be a type of payment?? I don't think so
     pass

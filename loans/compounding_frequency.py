@@ -19,7 +19,7 @@ class CompoundingFrequency(Enum):
 
     # Class methods
     @classmethod
-    def from_string(cls, comp_freq_str):
+    def from_string(cls, comp_freq_str: str) -> "CompoundingFrequency":
         """ Return a compounding frequency from a compounding frequency string """
         normalized = comp_freq_str.strip().lower()
         for comp_freq in cls:

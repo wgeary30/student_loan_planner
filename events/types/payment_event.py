@@ -28,7 +28,7 @@ class PaymentEvent(LoanEvent):
     remaining_interest: float
     remaining_fees: float
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.event_type: LoanEventType.PAYMENT
 
         total_paid = self.principal_paid + self.interest_paid + self.fees_paid

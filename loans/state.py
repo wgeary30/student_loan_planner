@@ -10,12 +10,16 @@ state
 from dataclasses import dataclass, field
 from datetime import date
 from loans.compounding_frequency import CompoundingFrequency
+from typing import TYPE_CHECKING
 
+# Avoid circular imports
+if TYPE_CHECKING:
+    from loans.types.loan_type import LoanType
 
 # LoanConfig class
 @dataclass
 class LoanConfig:
-    loan_type: str
+    loan_type: "LoanType"
     original_principal: float
     interest_rate: float
     disbursement_date: date

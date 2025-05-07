@@ -22,3 +22,13 @@ class LoanEventType(Enum):
     ADJUSTMENT = "adjustment"
     GRADUATION = "graduation"
     TERM_CHANGE = "term_change"
+
+    # Class methods
+    @classmethod
+    def from_string(cls, loan_event_str: str) -> "LoanEventType":
+        """ Return a loan event type from a loan event type string """
+        normalized = loan_event_str.strip().lower()
+        for loan_event_type in cls:
+            if loan_event_type.name.lower() == normalized:
+                return loan_event_type
+        raise ValueError(f"Unrecognized loan event type: '{loan_event_str}'")
