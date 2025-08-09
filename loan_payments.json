@@ -1,0 +1,14 @@
+{
+  "payments":[
+    {
+      "type": "extra",
+      "total_amount": 500,
+      "payment_date": "6/20/2025"
+    },
+    {
+      "type": "scheduled",
+      "total_amount": 300,
+      "payment_date": "7/20/2025"
+    }
+  ]
+}

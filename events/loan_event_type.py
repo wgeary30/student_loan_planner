@@ -14,14 +14,14 @@ class LoanEventType(Enum):
 
     DISBURSEMENT = "disbursement"
     PAYMENT = "payment"
-    INTEREST_ACCRUAL = "interest_accrual"
+    INTEREST_ACCRUAL = "interest accrual"
     FEE = "fee"
     CAPITALIZATION = "capitalization"
     DEFERMENT = "deferment"
     FORBEARANCE = "forbearance"
     ADJUSTMENT = "adjustment"
     GRADUATION = "graduation"
-    TERM_CHANGE = "term_change"
+    TERM_CHANGE = "term change"
 
     # Class methods
     @classmethod
@@ -29,6 +29,6 @@ class LoanEventType(Enum):
         """ Return a loan event type from a loan event type string """
         normalized = loan_event_str.strip().lower()
         for loan_event_type in cls:
-            if loan_event_type.name.lower() == normalized:
+            if loan_event_type.value.lower() == normalized:
                 return loan_event_type
         raise ValueError(f"Unrecognized loan event type: '{loan_event_str}'")

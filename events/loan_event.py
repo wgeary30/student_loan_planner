@@ -12,8 +12,12 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from events.loan_event_type import LoanEventType
 
-
 # LoanEvent class
+@dataclass
 class LoanEvent(ABC):
-    event_type: LoanEventType
-    timestamp: datetime = field(default_factory=datetime.now)
+    event_type: LoanEventType = field(init=False)
+    remaining_balance: float
+    remaining_principal: float
+    remaining_interest: float
+    remaining_fees: float
+    timestamp: datetime = field(default_factory=datetime.now, init=False)

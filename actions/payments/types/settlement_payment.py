@@ -3,13 +3,13 @@ William Geary
 Student Loan Planner
 5 May 2025
 --------------------------------------------------------------------------------
-forgiveness_credit
+settlement_payment
 """
 
 # Import modules
 from actions.payments.payment import Payment
 
-# ForgivenessCredit class
-class ForgivenessCredit(Payment):
-    # TODO: Should this be a type of payment?? I don't think so
+# SettlementPayment class
+class SettlementPayment(Payment):
+
     pass

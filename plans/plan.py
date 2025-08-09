@@ -1,15 +1,16 @@
 """
 William Geary
 Student Loan Planner
-5 May 2025
+27 July 2025
 --------------------------------------------------------------------------------
-extra_payment
+plan
 """
 
 # Import modules
-from payments.payment import Payment
+from abc import ABC
 
-# ExtraPayment class
-class ExtraPayment(Payment):
+# Plan class
+class Plan(ABC):
 
-    pass
+    def __init__(self):
+        pass

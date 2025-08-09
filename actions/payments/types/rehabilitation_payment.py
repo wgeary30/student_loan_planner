@@ -7,7 +7,7 @@ rehabilitation_payment
 """
 
 # Import modules
-from payments.payment import Payment
+from actions.payments.payment import Payment
 
 # RehabilitationPayment class
 class RehabilitationPayment(Payment):

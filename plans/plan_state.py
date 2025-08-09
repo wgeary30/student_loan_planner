@@ -1,15 +1,18 @@
 """
 William Geary
 Student Loan Planner
-5 May 2025
+27 July 2025
 --------------------------------------------------------------------------------
-settlement_payment
+plan_state
 """
 
 # Import modules
-from payments.payment import Payment
+from dataclasses import dataclass, field
 
-# SettlementPayment class
-class SettlementPayment(Payment):
+@dataclass
+class PlanConfig:
+    pass
 
+@dataclass
+class PlanState:
     pass

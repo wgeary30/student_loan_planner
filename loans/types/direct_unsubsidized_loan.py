@@ -12,6 +12,9 @@ from dateutil.relativedelta import relativedelta
 from loans.loan import Loan
 from typing import Tuple
 
+from utils import to_date
+
+
 # DirectUnsubsidizedLoan class
 class DirectUnsubsidizedLoan(Loan):
 
@@ -20,9 +23,9 @@ class DirectUnsubsidizedLoan(Loan):
 
     def grace_period_range(self) -> Tuple[date, date]:
         """ Determine the start and end date of the grace period """
-        grace_start = self.disbursement_date
-        grace_end = self.disbursement_date + relativedelta(months=self.GRACE_PERIOD_MONTHS)
-        return grace_start, grace_end
+        grace_start = self.graduation_date
+        grace_end = self.graduation_date + relativedelta(months=self.GRACE_PERIOD_MONTHS)
+        return to_date(grace_start), to_date(grace_end)
 
     def expected_monthly_payment(self) -> float:
         """ Calculate the expected monthly payment over the term of the loan,
@@ -38,9 +41,6 @@ class DirectUnsubsidizedLoan(Loan):
 
     def current_monthly_payment(self):
         pass
-
-    def remaining_balance(self):
-        return self.principal  # TODO: Correct logic, only here for loan __str__ method
 
     def apply_relief(self, relief_policy):
         pass

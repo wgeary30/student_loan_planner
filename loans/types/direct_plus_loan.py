@@ -30,8 +30,5 @@ class DirectPlusLoan(Loan):
     def current_monthly_payment(self):
         pass
 
-    def remaining_balance(self):
-        return self.principal  # TODO: Correct logic, only here for loan __str__ method
-
     def apply_relief(self, relief_policy):
         pass
